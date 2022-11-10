@@ -1,11 +1,11 @@
-﻿using Domain.Modelo;
+﻿using Domain.Modelos;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Data
 {
-    public class AplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public AplicationDbContext(DbContextOptions<AplicationDbContext> options) :base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options) { }
         public DbSet<Personaje> personajes { get; set; }
         public DbSet<Genero> generos { get; set; }
     }

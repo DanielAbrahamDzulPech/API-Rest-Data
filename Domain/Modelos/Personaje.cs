@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Modelo
+namespace Domain.Modelos
 {
     public class Personaje
     {
@@ -18,5 +18,13 @@ namespace Domain.Modelo
         [ForeignKey("genero")]
         public int FkGenero { get; set; }
         public Genero genero { get; set; }
+    }
+
+    public class PersonajeResponse
+    {
+        public string Nombre { get; set; }
+        public string Color { get; set; }
+        public string Poder { get; set; }
+        public int FkGenero { get; set; }
     }
 }
