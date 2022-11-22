@@ -18,6 +18,8 @@ namespace WebApplication1
 {
     public class Startup
     {
+        //Agregar el Cors
+        private readonly string _MyCors = "MyCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,6 +40,17 @@ namespace WebApplication1
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            //Cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _MyCors, builder =>
+                {
+                    //builder.WithOrigins("http://localhost");
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader().AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +66,9 @@ namespace WebApplication1
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //Agregar nuestra del CORS
+            app.UseCors(_MyCors);
 
             app.UseAuthorization();
 
